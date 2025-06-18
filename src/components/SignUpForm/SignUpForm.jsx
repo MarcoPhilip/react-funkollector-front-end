@@ -1,13 +1,18 @@
 // SignUpForm.jsx
 
-import { useState } from 'react';
+// Add the useContext from react
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 
 // Import the signup function from authServices
 import { signUp } from '../../services/authService';
 
+// Import the UserContext object
+import { UserContext } from '../../contexts/UserContext';
+
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     firstname: '',
@@ -28,6 +33,10 @@ const SignUpForm = () => {
     evt.preventDefault();
     try {
         const newUser = await signUp(formData);
+        // Call the setUser function to update the user state, just like normal.
+        setUser(newUser);
+        // Bring back user to home page using navigate function
+        navigate('/');
     } catch (err) {
         setMessage(err.message);
     }
