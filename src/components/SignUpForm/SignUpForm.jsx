@@ -48,7 +48,7 @@ const SignUpForm = () => {
 
   return (
     <main>
-      <h1>Sign Up</h1>
+      <h3>Sign Up</h3>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <div>
