@@ -29,14 +29,17 @@ function App() {
 
   // Create a useEffect function
   useEffect(() => {
-
+    // Create async function
     const fetchFunkos = async () => {
-      
+      // Call on the funko service's index function
       const fetchedFunkos = await funkoService.index();
-
+      // Set funkos state to the returned funkos data
       setFunkos(fetchFunkos);
-    }
-  });
+    };
+    // Invoke function
+    fetchFunkos();
+    // Add empty dependency array
+  }, []);
 
   return (
     <>
