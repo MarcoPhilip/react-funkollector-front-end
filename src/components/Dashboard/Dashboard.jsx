@@ -4,6 +4,7 @@ import { useContext } from 'react';
 
 import { UserContext } from '../../contexts/UserContext';
 
+
 const Dashboard = () => {
   const { user } = useContext(UserContext);
 
@@ -13,6 +14,7 @@ const Dashboard = () => {
       <p>
         This is the dashboard page where you can see a list of all the users.
       </p>
+      
     </main>
   );
 };
