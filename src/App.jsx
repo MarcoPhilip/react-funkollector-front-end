@@ -19,7 +19,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import FunkoList from './components/FunkoList/FunkoList';
 // Import FunkoDetail component
 import FunkoDetail from './components/FunkoDetail/FunkoDetail';
-
+// Import the FunkoForm component
+import FunkoForm from './components/FunkoForm/FunkoForm';
 
 // Import the UserContext
 import { UserContext } from './contexts/UserContext';
@@ -35,6 +36,8 @@ function App() {
   const { user } = useContext(UserContext);
   // Get a selected funko
   const [selected, setSelected] = useState(null);
+  // Add a state var for funko forms
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
 
   // Create a useEffect function
@@ -60,9 +63,26 @@ function App() {
     // Add empty dependency array
   }, []);
 
+  // Selected funko handler function
   const handleSelect = (funko) => {
     setSelected(funko);
-    console.log(funko)
+    console.log(funko);
+    setIsFormOpen(false);
+  };
+
+  // Form view handler function
+  const handleFormView = () => {
+    setIsFormOpen(!isFormOpen);
+  };
+
+  // Create a function that handles adding a funko
+  const handleAddFunko = async (formdata) => {
+    try {
+      // Call the funko service (create)
+      
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (
@@ -70,7 +90,7 @@ function App() {
       <NavBar />
       <h2>Welcome to the Funkollector App!</h2>
       <Routes>
-        
+
         <Route path='/' element={
           user ? 
             <Dashboard
@@ -91,14 +111,23 @@ function App() {
           <FunkoList 
             funkos={funkos}
             handleSelect={handleSelect}
+            handleFormView={handleFormView}
+            isFormOpen={isFormOpen}
           />} 
         />
 
         <Route path='/funkos/:id' element={
-          <FunkoDetail 
+          isFormOpen ? (
+            <FunkoForm />
+          ) : (
+            <FunkoDetail 
             funkos={funkos} 
             selected={selected}
-          />} 
+            handleFormView={handleFormView}
+            isFormOpen={isFormOpen}
+          />
+          )}
+          
         />
 
         {/* <Route path='/collection' element={<Collection />} /> */}
