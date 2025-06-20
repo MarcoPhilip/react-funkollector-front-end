@@ -1,22 +1,26 @@
 
 
-const FunkoList = (props) => {
-
+const FunkoList = ({funkos}) => {
+    if (!funkos || funkos.length === 0) {
+        return <p>No Funkos yet.</p>
+    }
 
     return (
+        <>
         <div>
-            {props.funkos.length ? (
+            {funkos.length === 0 ? (
                 <h2>No Funkos</h2>
             ) : (
-                <ul>
-                    {props.funkos.map((funko) => (
-                        <li>
+                <div>
+                    {funkos.map((funko) => (
+                        <li key={funko._id} >
                             {funko.name}
                         </li>
                     ))}
-                </ul>
+                </div>
             )}
         </div>
+        </> 
     );
 };
 

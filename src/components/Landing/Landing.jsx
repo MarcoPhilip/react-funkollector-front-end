@@ -4,6 +4,8 @@
 import FunkoList from '../../components/FunkoList/FunkoList';
 
 const Landing = ({funkos}) => {
+
+
   return (
     <main>
       <h1>Hello, you are on the landing page for visitors.</h1>

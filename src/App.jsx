@@ -35,7 +35,7 @@ function App() {
       try {
       // Call on the funko service's index function
       const fetchedFunkos = await funkoService.index();
-
+      
       // Don't forget to pass the error object to the new Error
       if (fetchedFunkos.err) {
         throw new Error(fetchedFunkos.err);
@@ -56,7 +56,7 @@ function App() {
       <NavBar />
       <h2>Welcome to the Funkollector App!</h2>
       <Routes>
-        <Route path='/' element={user ? <Dashboard funkos={funkos}/> : <Landing funkos={funkos}/> } />
+        <Route path='/' element={user ? <Dashboard /> : <Landing funkos={funkos}/> } />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/sign-up' element={<SignUpForm />} />
       </Routes>
