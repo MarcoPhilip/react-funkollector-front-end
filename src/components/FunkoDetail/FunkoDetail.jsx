@@ -15,7 +15,7 @@ const FunkoDetail = (props) => {
       <h2>Series: {props.selected.series}</h2>
       <h2> Number: {props.selected.number}</h2>
       <h2>Rarity: {props.selected.rarity} </h2>
-      <h2>Posted By: {props.selected.owner}</h2>
+      {/* <h2>Posted By: {props.selected.owner?.firstname}</h2>  */}
     </div>
   );
 };

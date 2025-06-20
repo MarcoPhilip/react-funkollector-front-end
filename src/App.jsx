@@ -70,8 +70,7 @@ function App() {
       <NavBar />
       <h2>Welcome to the Funkollector App!</h2>
       <Routes>
-
-            
+        
         <Route path='/' element={
           user ? 
             <Dashboard

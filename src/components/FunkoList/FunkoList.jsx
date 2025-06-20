@@ -1,8 +1,7 @@
-
+import { Link } from 'react-router';
 
 const FunkoList = ({funkos, handleSelect }) => {
     
-    console.log(handleSelect)
     if (!funkos || funkos.length === 0) {
         return <p>No Funkos yet.</p>
     }
@@ -15,12 +14,12 @@ const FunkoList = ({funkos, handleSelect }) => {
             ) : (
                 <div>
                     {funkos.map((funko) => (
-                        <li 
+                        <Link to={`/funkos/${funko._id}`}
                             key={funko._id}
                             onClick={() => handleSelect(funko)}
                         >
                             {funko.name}
-                        </li>
+                        </Link>
                     ))}
                 </div>
             )}

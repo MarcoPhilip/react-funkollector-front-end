@@ -1,5 +1,5 @@
 // src/components/Landing.jsx
-
+import { Link } from 'react-router';
 
 const Landing = ({funkos, handleSelect }) => {
 
@@ -10,12 +10,12 @@ const Landing = ({funkos, handleSelect }) => {
       <p>Here are all the funkos! Sign In or Sign Up to explore more</p>
       <div>
           {funkos.map((funko) => (
-              <li 
+              <Link to={`/funkos/${funko._id}`}
                   key={funko._id}
                   onClick={() => handleSelect(funko)}
               >
                   {funko.name}
-              </li>
+              </Link>
           ))}
       </div>
     </main>
