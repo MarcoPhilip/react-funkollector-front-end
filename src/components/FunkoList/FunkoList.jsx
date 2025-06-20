@@ -1,6 +1,8 @@
 
 
-const FunkoList = ({funkos}) => {
+const FunkoList = ({funkos, handleSelect }) => {
+    
+    console.log(handleSelect)
     if (!funkos || funkos.length === 0) {
         return <p>No Funkos yet.</p>
     }
@@ -13,7 +15,10 @@ const FunkoList = ({funkos}) => {
             ) : (
                 <div>
                     {funkos.map((funko) => (
-                        <li key={funko._id} >
+                        <li 
+                            key={funko._id}
+                            onClick={() => handleSelect(funko)}
+                        >
                             {funko.name}
                         </li>
                     ))}
