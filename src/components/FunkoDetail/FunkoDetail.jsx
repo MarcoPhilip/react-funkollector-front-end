@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import { useEffect, useState, useContext } from "react";
 import * as funkoService from '../../services/funkoService';
 import { UserContext } from "../../contexts/UserContext";
+import { Link } from "react-router";
 
 
 const FunkoDetail = () => {
@@ -53,7 +54,11 @@ const FunkoDetail = () => {
       <h2>Rarity: {funko.rarity} </h2>
       <h2>Posted By: {funko.owner.firstname} {funko.owner.lastname}</h2> 
       {user && funko.owner && user._id === funko.owner._id && (
-        <button onClick={() => setEditFunko(true)}>Edit Funko</button>
+        <button>
+          <Link to={`/funkos/${funko._id}/edit`}>
+            Edit Funko
+          </Link>
+        </button>
       )}
     </div>
   );

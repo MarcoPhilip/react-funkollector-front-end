@@ -101,6 +101,29 @@ function App() {
     }
   };
 
+  // Add the handlUpdate function
+  const handleUpdate = async (id, updatedData) => {
+    try {
+      // Get the update function form funkoService
+      const updatedFunko = await funkoService.update(id, updatedData);
+
+      // If new funko fails, throw a new error
+      if (updatedFunko.err) {
+        throw new Error(updatedFunko.err)
+      };
+
+      const updatedFunkos = funkos.map(f =>
+        f._id === updatedFunko._id ? updatedFunko : f
+      );
+
+      setFunkos(updatedFunkos);
+      return updatedFunko;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
   return (
     <>
       <NavBar />
@@ -134,12 +157,23 @@ function App() {
         />
 
         <Route path='/funkos/:id' element={
-            <FunkoDetail />
+            <FunkoDetail 
+              user={user}
+            />
         }/>
 
         <Route path='/funkos/new' element={
           <FunkoForm 
-            handleAddFunko={handleAddFunko}
+            handleSubmit={handleAddFunko}
+            buttonText="Add Funko"
+          />
+        }/>
+
+        <Route path='/funkos/:id/edit' element={
+          <FunkoForm
+            initialFormData={selected}
+            handleSubmit={handleUpdate}
+            buttonText="Update Funko"
           />
         }/>
 
@@ -148,6 +182,8 @@ function App() {
 
         {/* <Route path='/user' element={<AllUser />} /> */}
         {/* <Router path='/user/:id' element={<User />} /> */}
+
+
         
       </Routes>
     </>

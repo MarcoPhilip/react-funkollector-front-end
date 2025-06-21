@@ -1,10 +1,13 @@
 // src/components/PetForm/PetForm.jsx
 
+// Imports for react 
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
+import * as funkoService from '../../services/funkoService';
 
 
 
+// Define the enums as an array
 const seriesEnum = [
         'Pop! 8-Bit',
         'Pop! Ad Icons',
@@ -115,83 +118,122 @@ const seriesEnum = [
         'Pop! Zodiac',
     ];
 
-const FunkoForm = (props) => {
-  // formData state to control the form.
-  const initialState = {
-    name: '',
-    series: '',
-    number: '',
-    rarity: '',
-  };
+// Define the Funko form component
+const FunkoForm = ({ handleSubmit, buttonText = 'Submit', initialFormData = {}}) => {
+    // Use navigate
+    const navigate = useNavigate();
+    // Get the id from the URL params
+    const { id } = useParams();
 
-  const [formData, setFormData] = useState(initialState);
-  const navigate = useNavigate();
+    // formData state to control the form. Define as empty form
+    const [formData, setFormData] = useState({
+        name: '',
+        series: '',
+        number: '',
+        rarity: '',
+    });
+
+    // Define handleChange function to update formData state.
+    const handleChange = (evt) => {
+        // Get the user input and assign it to the form data as it changes
+        setFormData({ ...formData, [evt.target.name]: evt.target.value });
+    };
 
 
-  // handleChange function to update formData state.
-  const handleChange = (evt) => {
-    setFormData({ ...formData, [evt.target.name]: evt.target.value });
-  };
+    // Create useEffect 
+    useEffect(() => {
+        // Write async function and fetch the data
+        const fetchFunko = async () => {
+            if (id) {
+                // Get the show function from the funkoService for edit purpose
+                const funko = await funkoService.show(id);
+                setFormData({
+                    name: funko.name || '',
+                    series: funko.series || '',
+                    number: funko.number || '',
+                    rarity: funko.rarity || ''
+                });
+            } else if (initialFormData.name) {
+                setFormData({
+                    name: initialFormData.name || '',
+                    series: initialFormData.series || '',
+                    number: initialFormData.number || '',
+                    rarity: initialFormData.rarity || ''
+                });
+            }
+        }
+        // Call fetchFunko
+        fetchFunko();
+        // Dependency array
+    }, [id, initialFormData]);
 
-  // Create the handleSubmit
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    const newFunko = await props.handleAddFunko(formData);
-    // Redirect the user to the new funko details
-    navigate(`/funkos/${newFunko._id}`);
-  }
+    // Create the submit functionality
+    const onSubmit = async (evt) => {
+        evt.preventDefault();
+        // Rename id from params as the updated funko
+        const funko = id
+        // If editing, call handle submit using id and formdata
+        ? await handleSubmit(id, formData)
+        : await handleSubmit(formData);
 
-  // And finally, the form itself.
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name"> Name </label>
-        <input
-          type='text'
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="series"> Series </label>
-        <select
-          type='text'
-          id="series"
-          name="series"
-          value={formData.series}
-          onChange={handleChange}
-          required
-        >
-            <option value='' disabled>
-                Select a series
-            </option>
-            {seriesEnum.map((option) => (
-                <option key={option} value={option}>
-                    {option}
+        // If the funko is successfully created or updated
+        if (funko?._id) {
+            // Redirect the user to the new funko details
+            navigate(`/funkos/${updatedFunko._id}`);
+        }
+    };
+
+    // And finally, the form itself.
+    return (
+        <div>
+        <form onSubmit={onSubmit}>
+            <label htmlFor="name"> Name </label>
+            <input
+            type='text'
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            />
+            <label htmlFor="series"> Series </label>
+            <select
+            type='text'
+            id="series"
+            name="series"
+            value={formData.series}
+            onChange={handleChange}
+            required
+            >
+                <option value='' disabled>
+                    Select a series
                 </option>
-            ))}
-        </select>
-        <label htmlFor="number"> Number </label>
-        <input
-          type='number'
-          id="number"
-          name="number"
-          value={formData.number}
-          onChange={handleChange}
-        />
-        <label htmlFor="rarity"> Rarity </label>
-        <input
-          type='text'
-          id="rarity"
-          name="rarity"
-          value={formData.rarity}
-          onChange={handleChange}
-        />
-        <button type="submit">Add New Funko</button>
-      </form>
-    </div>
-  );
+                {seriesEnum.map((option) => (
+                    <option key={option} value={option}>
+                        {option}
+                    </option>
+                ))}
+            </select>
+            <label htmlFor="number"> Number </label>
+            <input
+            type='number'
+            id="number"
+            name="number"
+            value={formData.number}
+            onChange={handleChange}
+            />
+            <label htmlFor="rarity"> Rarity </label>
+            <input
+            type='text'
+            id="rarity"
+            name="rarity"
+            value={formData.rarity}
+            onChange={handleChange}
+            />
+            <button type="submit">{buttonText}</button>
+        </form>
+        </div>
+    );
 };
 
 export default FunkoForm;
