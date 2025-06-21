@@ -79,7 +79,17 @@ function App() {
   const handleAddFunko = async (formdata) => {
     try {
       // Call the funko service (create)
-      
+      const newFunko = await funkoService.create(formdata);
+      // If new funko fails, throw a new error
+      if (newFunko.err) {
+        throw new Error(newFunko.err)
+      };
+      // Add the new funko object to the current funko arrays
+      const newFunkoList = [...funkos, newFunko];
+      // Set the array as the new funkos
+      setFunkos(newFunkoList);
+      // Close form after adding the new funko
+      setIsFormOpen(false);
     } catch (err) {
       console.log(err)
     }
@@ -118,14 +128,16 @@ function App() {
 
         <Route path='/funkos/:id' element={
           isFormOpen ? (
-            <FunkoForm />
+            <FunkoForm 
+              handleAddFunko={handleAddFunko}
+            />
           ) : (
             <FunkoDetail 
-            funkos={funkos} 
-            selected={selected}
-            handleFormView={handleFormView}
-            isFormOpen={isFormOpen}
-          />
+              funkos={funkos} 
+              selected={selected}
+              handleFormView={handleFormView}
+              isFormOpen={isFormOpen}
+            />
           )}
           
         />
