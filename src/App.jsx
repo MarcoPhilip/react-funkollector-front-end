@@ -2,8 +2,12 @@
 import './App.css'
 // Import useContext
 import { useContext } from 'react';
-import { Routes, Route } from 'react-router'; // Import React Router
+import { Routes, Route, } from 'react-router'; // Import React Router
 import { useState, useEffect } from 'react';
+
+
+
+
 
 // ! COMPONENTS BELOW
 // Import navbar
@@ -72,11 +76,13 @@ function App() {
 
   // Form view handler function
   const handleFormView = () => {
+    if (!selected?._id) setSelected(null);
     setIsFormOpen(!isFormOpen);
   };
 
   // Create a function that handles adding a funko
   const handleAddFunko = async (formdata) => {
+
     try {
       // Call the funko service (create)
       const newFunko = await funkoService.create(formdata);
@@ -90,6 +96,7 @@ function App() {
       setFunkos(newFunkoList);
       // Close form after adding the new funko
       setIsFormOpen(false);
+      return newFunko;
     } catch (err) {
       console.log(err)
     }
@@ -121,26 +128,27 @@ function App() {
           <FunkoList 
             funkos={funkos}
             handleSelect={handleSelect}
+            user={user}
             handleFormView={handleFormView}
-            isFormOpen={isFormOpen}
+            
           />} 
         />
 
         <Route path='/funkos/:id' element={
-          isFormOpen ? (
-            <FunkoForm 
-              handleAddFunko={handleAddFunko}
-            />
-          ) : (
             <FunkoDetail 
               funkos={funkos} 
               selected={selected}
               handleFormView={handleFormView}
               isFormOpen={isFormOpen}
+              user={user}
             />
-          )}
-          
-        />
+        }/>
+
+        <Route path='/funkos/new' element={
+          <FunkoForm 
+            handleAddFunko={handleAddFunko}
+          />
+        }/>
 
         {/* <Route path='/collection' element={<Collection />} /> */}
         {/* <Route path='/wishlist' element={<Wishlist />} /> */}

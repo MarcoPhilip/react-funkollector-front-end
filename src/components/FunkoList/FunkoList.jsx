@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-const FunkoList = ({funkos, handleSelect }) => {
+const FunkoList = ({funkos, handleSelect, user, handleFormView, isFormOpen }) => {
     
     if (!funkos || funkos.length === 0) {
         return <p>No Funkos yet.</p>
@@ -24,6 +24,13 @@ const FunkoList = ({funkos, handleSelect }) => {
                 </div>
             )}
         </div>
+        { user && (
+            <Link to="/funkos/new">
+                <button>
+                    Add New Funko
+                </button>
+            </Link>        
+        )} 
         </> 
     );
 };

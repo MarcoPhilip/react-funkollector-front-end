@@ -1,6 +1,9 @@
 // src/components/PetForm/PetForm.jsx
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+
+
 
 const seriesEnum = [
         'Pop! 8-Bit',
@@ -114,14 +117,15 @@ const seriesEnum = [
 
 const FunkoForm = (props) => {
   // formData state to control the form.
-  const [formData, setFormData] = useState({
+  const initialState = {
     name: '',
     series: '',
     number: '',
     rarity: '',
-  });
+  };
 
-  
+  const [formData, setFormData] = useState(initialState);
+  const navigate = useNavigate();
 
 
   // handleChange function to update formData state.
@@ -130,9 +134,11 @@ const FunkoForm = (props) => {
   };
 
   // Create the handleSubmit
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    props.handleAddFunko(formData);
+    const newFunko = await props.handleAddFunko(formData);
+    // Redirect the user to the new funko details
+    navigate(`/funkos/${newFunko._id}`);
   }
 
   // And finally, the form itself.
@@ -157,6 +163,9 @@ const FunkoForm = (props) => {
           onChange={handleChange}
           required
         >
+            <option value='' disabled>
+                Select a series
+            </option>
             {seriesEnum.map((option) => (
                 <option key={option} value={option}>
                     {option}

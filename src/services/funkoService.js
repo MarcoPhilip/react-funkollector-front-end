@@ -13,11 +13,20 @@ const index = async () => {
     }
 };
 
-
+// Show a single funko
+const show = async (funkoid) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${funkoid}`);
+        return res.json();
+    } catch (err) {
+        console.log(err);
+    }
+} 
 
 
 // Create the service function called create
 const create = async (formData) => {
+  const token = localStorage.getItem('token');
   try {
     // Specify a POST request
     // Attach a Content-Type header and send in JSON data('application/json)
@@ -25,6 +34,7 @@ const create = async (formData) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
 
         body: JSON.stringify(formData),
@@ -45,5 +55,6 @@ const create = async (formData) => {
 // Export all functions above
 export {
     index,
+    show,
     create
 }
