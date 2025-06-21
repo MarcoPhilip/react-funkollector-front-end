@@ -179,7 +179,7 @@ const FunkoForm = ({ handleSubmit, buttonText = 'Submit', initialFormData = {}})
         // If the funko is successfully created or updated
         if (funko?._id) {
             // Redirect the user to the new funko details
-            navigate(`/funkos/${updatedFunko._id}`);
+            navigate(`/funkos/${funko._id}`);
         }
     };
 

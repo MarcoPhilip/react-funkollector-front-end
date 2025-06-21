@@ -65,7 +65,21 @@ const update = async (id, formData) => {
     }
 }
 
-// Create the service function called deleteFunko
+// Create the service function called delete
+const deleteFunko = async (id) => {
+    const token = localStorage.getItem('token');
+    try {
+        const res = await fetch(`${BASE_URL}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+        return res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 
 
@@ -75,5 +89,6 @@ export {
     index,
     show,
     create,
-    update
+    update,
+    deleteFunko
 }

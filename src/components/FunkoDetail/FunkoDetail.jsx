@@ -6,12 +6,11 @@ import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router";
 
 
-const FunkoDetail = () => {
+const FunkoDetail = ({ onDelete }) => {
   // grab the id from the route /:id
   const { id } = useParams();
   const { user } = useContext(UserContext);
   const [funko, setFunko] = useState(null);
-  const [editFunko, setEditFunko] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +35,20 @@ const FunkoDetail = () => {
     fetchFunko();
   }, [id]);
 
+  // Define a function called handleDelete 
+  const handleDelete = async () => {
+    try {
+      // Call for the onDelete(the handle delete function from app jsx)
+      await onDelete(id);
+      // Then navigate back to the funkos
+      navigate('/funkos');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   
+
   // return if props.selected is null
   if (!funko) {
     return (
@@ -54,11 +66,16 @@ const FunkoDetail = () => {
       <h2>Rarity: {funko.rarity} </h2>
       <h2>Posted By: {funko.owner.firstname} {funko.owner.lastname}</h2> 
       {user && funko.owner && user._id === funko.owner._id && (
-        <button>
-          <Link to={`/funkos/${funko._id}/edit`}>
-            Edit Funko
-          </Link>
-        </button>
+        <div>
+          <button>
+            <Link to={`/funkos/${funko._id}/edit`}>
+              Edit Funko
+            </Link>
+          </button>
+          <button onClick={() => handleDelete(funko._id)}>
+            Delete Funko
+          </button>
+        </div>
       )}
     </div>
   );

@@ -3,7 +3,7 @@ import './App.css'
 // Import useContext
 import { useContext } from 'react';
 import { Routes, Route, } from 'react-router'; // Import React Router
-import { useState, useEffect } from 'react';
+import { useState, useEffect, } from 'react';
 
 
 
@@ -26,8 +26,11 @@ import FunkoDetail from './components/FunkoDetail/FunkoDetail';
 // Import the FunkoForm component
 import FunkoForm from './components/FunkoForm/FunkoForm';
 
+
 // Import the UserContext
 import { UserContext } from './contexts/UserContext';
+
+
 // Add an import for the funkoService functions
 import * as funkoService from './services/funkoService';
 
@@ -42,6 +45,7 @@ function App() {
   const [selected, setSelected] = useState(null);
   // Add a state var for funko forms
   const [isFormOpen, setIsFormOpen] = useState(false);
+
 
 
   // Create a useEffect function
@@ -123,6 +127,24 @@ function App() {
     }
   };
 
+  // Add the handleDelete function
+  const handleDelete = async (id) => {
+    try {
+      // Get the deleteFunko function from funkoService and use the id as params
+      await funkoService.deleteFunko(id);
+
+      // Filter out the deletedfunko and set the funkos as the new state
+      const updatedFunkos = funkos.filter((funko) => funko._id !== id);
+
+      // Set the funkos with the filtered lists of funkos
+      setFunkos(updatedFunkos);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  
 
   return (
     <>
@@ -159,6 +181,7 @@ function App() {
         <Route path='/funkos/:id' element={
             <FunkoDetail 
               user={user}
+              onDelete={handleDelete}
             />
         }/>
 
