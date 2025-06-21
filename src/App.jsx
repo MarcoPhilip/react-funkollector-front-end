@@ -70,7 +70,6 @@ function App() {
   // Selected funko handler function
   const handleSelect = (funko) => {
     setSelected(funko);
-    console.log(funko);
     setIsFormOpen(false);
   };
 
@@ -135,13 +134,7 @@ function App() {
         />
 
         <Route path='/funkos/:id' element={
-            <FunkoDetail 
-              funkos={funkos} 
-              selected={selected}
-              handleFormView={handleFormView}
-              isFormOpen={isFormOpen}
-              user={user}
-            />
+            <FunkoDetail />
         }/>
 
         <Route path='/funkos/new' element={

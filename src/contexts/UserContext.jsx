@@ -1,6 +1,6 @@
 // src/contexts/UserContext.jsx
 
-import { createContext, use, useState } from 'react';
+import { createContext, useState } from 'react';
 
 const UserContext = createContext();
 

@@ -47,6 +47,24 @@ const create = async (formData) => {
 
 
 
+// Create a function called update for updating a single funko (USE PUT method)
+const update = async (id, formData) => {
+    const token = localStorage.getItem('token');
+    try {
+        const res = await fetch(`${BASE_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(formData)
+        });
+        return res.json();
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 // Create the service function called deleteFunko
 
 
@@ -56,5 +74,6 @@ const create = async (formData) => {
 export {
     index,
     show,
-    create
+    create,
+    update
 }
