@@ -2,7 +2,7 @@
 import './App.css'
 // Import useContext
 import { useContext } from 'react';
-import { Routes, Route, } from 'react-router'; // Import React Router
+import { Routes, Route, Navigate } from 'react-router'; // Import React Router
 import { useState, useEffect, } from 'react';
 
 
@@ -213,9 +213,7 @@ function App() {
             handleSelect={handleSelect}
           /> 
           : 
-            <Landing 
-              funkos={funkos}
-              handleSelect={handleSelect}
+            <Navigate to='/sign-in'
             />}  
         />
 
@@ -228,20 +226,29 @@ function App() {
             handleSelect={handleSelect}
           /> 
           : 
-            <Landing 
-              funkos={funkos}
-              handleSelect={handleSelect}
-            />} 
+            <Navigate to='/sign-in'
+            />}   
         />
 
-        <Route path='/users' element={<UserList />} />
-        <Router path='/user/:id' element={<UserProfile />} />
+        <Route path='/users' element={
+          user ?
+            <UserList />
+          : 
+            <Navigate to='/sign-in'
+            />}  
+        />
 
+        <Route path='/users/:userId' element={
+          user ? 
+            <UserProfile /> 
+          : 
+            <Navigate to='/sign-in'
+            />}  
+        />
 
-        
       </Routes>
     </>
   )
-}
+};
 
-export default App
+export default App;

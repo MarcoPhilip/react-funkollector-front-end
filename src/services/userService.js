@@ -3,20 +3,17 @@
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users`;
 
 // Create service function called index
-const index = async () => {
+const allUsers = async () => {
+  // Get token
+  const token = localStorage.getItem('token');
+
   try {
-    // Change the fetch request so that it includes the Authorization header
     const res = await fetch(BASE_URL, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
     });
-
-    const data = await res.json();
-
-    if (data.err) {
-      throw new Error(data.err);
-    }
-
-    return data
+    return res.json();
   } catch (err) {
     console.log(err);
     throw new Error(err);
@@ -24,8 +21,24 @@ const index = async () => {
 };
 
 
-// Create 
+// Create service function called fetchedUser
+const fetchedUser = async (userId) => {
+  // Get token 
+  const token = localStorage.getItem('token');
+
+  try {
+    const res = await fetch(`${BASE_URL}/${userId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 export {
-  index,
+  allUsers,
+  fetchedUser
 };
