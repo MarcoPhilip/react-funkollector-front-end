@@ -6,9 +6,6 @@ import { Routes, Route, } from 'react-router'; // Import React Router
 import { useState, useEffect, } from 'react';
 
 
-
-
-
 // ! COMPONENTS BELOW
 // Import navbar
 import NavBar from './components/NavBar/NavBar';
@@ -29,6 +26,10 @@ import FunkoForm from './components/FunkoForm/FunkoForm';
 import Collection from './components/Collection/Collection';
 // Import the Wishlist component 
 import Wishlist from './components/Wishlist/Wishlist';
+// Import the UserList component
+import UserList from './components/UserList/UserList';
+// Import the UserProfile component
+import UserProfile from './components/UserProfile/UserProfile';
 
 
 // Import the UserContext
@@ -219,10 +220,22 @@ function App() {
         />
 
 
-        <Route path='/wishlists' element={<Wishlist />} />
+        <Route path='/wishlists' element={
+          user ? 
+            <Wishlist 
+            user={user}
+            funkos={funkos}
+            handleSelect={handleSelect}
+          /> 
+          : 
+            <Landing 
+              funkos={funkos}
+              handleSelect={handleSelect}
+            />} 
+        />
 
-        {/* <Route path='/user' element={<AllUser />} /> */}
-        {/* <Router path='/user/:id' element={<User />} /> */}
+        <Route path='/users' element={<UserList />} />
+        <Router path='/user/:id' element={<UserProfile />} />
 
 
         

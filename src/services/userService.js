@@ -2,6 +2,7 @@
 
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/users`;
 
+// Create service function called index
 const index = async () => {
   try {
     // Change the fetch request so that it includes the Authorization header
@@ -22,6 +23,8 @@ const index = async () => {
   }
 };
 
+
+// Create 
 
 export {
   index,

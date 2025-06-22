@@ -42,7 +42,7 @@ const Collection = ({ handleSelect }) => {
             ) : (
                 <ul>
                     {collection.funkos.map((funko) => (     
-                        <li key={`${funko._id}`}>
+                        <li key={funko._id}>
                         <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}>
                         {funko.name}
                         </Link>

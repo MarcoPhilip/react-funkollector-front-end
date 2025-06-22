@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import { useEffect, useState, useContext } from "react";
 import * as funkoService from '../../services/funkoService';
 import * as collectionService from '../../services/collectionService';
+import * as wishlistService from '../../services/wishlistService';
 import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router";
 
@@ -14,6 +15,7 @@ const FunkoDetail = ({ onDelete }) => {
   const navigate = useNavigate();
   const [funko, setFunko] = useState(null);
   const [collected, setCollected] = useState(false);
+  const [wished, setWished] = useState(false)
 
   useEffect(() => {
     // Create async function
@@ -30,21 +32,30 @@ const FunkoDetail = ({ onDelete }) => {
         // Set funko state to the returned funko data
         setFunko(funko);
 
-        // Keep add to collect button disabled if its already in collection
+
         if (user) {
           // Check if funko is in collection
           const collection = await collectionService.collectionIndex();
           // Using some function, check for true/false in the collection
           const inCollection = collection.funkos.some(funko => funko._id === id);
+          // Invoke set collected state
           setCollected(inCollection);
+
+          // Check if funko is in wishlist
+          const wishlist = await wishlistService.wishlistIndex();
+          // Using some function, check for true/false in the wishlist
+          const inWishlist = wishlist.funkos.some(funko => funko._id === id);
+          // Invoke set wishlist state
+          setWished(inWishlist);
         }
       } catch (err) {
         console.log(err);
       }
     };
-
+    // Invoke the fetchFunko function
     fetchFunko();
-  }, [id]);
+    // Dependency array
+  }, [user, id]);
 
   // Define a function called handleDelete 
   const handleDelete = async () => {
@@ -86,6 +97,36 @@ const FunkoDetail = ({ onDelete }) => {
     }
   };
 
+
+  // Define handleAddCollection
+  const handleAddWishlist = async () => {
+    try {
+      // Get the addToCollection from collectionService
+      await wishlistService.addToWishlist(funko._id);
+
+      // Set collect to true
+      setWished(true);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // Define handleRemoveCollection
+  const handleRemoveWishlist = async () => {
+    try {
+      // get the removeFromCollection from collectionService
+      await wishlistService.removeFromWishlist(funko._id);
+
+      // Set collect to false
+      setWished(false);
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
   // return if props.selected is null
   if (!funko) {
     return (
@@ -117,12 +158,19 @@ const FunkoDetail = ({ onDelete }) => {
         </div>
       )}
 
-
-      {user && (
-        <button onClick={collected ? handleRemoveCollection : handleAddCollection}>
+      <div>
+         {user && (
+          <div>
+          <button onClick={collected ? handleRemoveCollection : handleAddCollection}>
             {collected ? 'Remove From Collection' : 'Add To Collection'}
-        </button>
-      )}
+          </button>
+          <button onClick={wished ? handleRemoveWishlist : handleAddWishlist}>
+            {wished ? 'Remove From Wishlist' : 'Add To Wishlist'}
+          </button>
+          </div>
+        )} 
+      </div>
+      
     </div>
   );
 };

@@ -31,6 +31,7 @@ const NavBar = () => {
                     <li><Link to='/funkos'>All Funkos</Link></li>
                     <li><Link to='/collections'>My Collections</Link></li>
                     <li><Link to='/wishlists'>My Wishlists</Link></li>
+                    <li><Link to='/users'>All Funkollectors</Link></li>
                 </ul>
             ) : (
                 <ul>
