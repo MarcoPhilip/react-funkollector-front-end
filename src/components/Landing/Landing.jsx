@@ -10,12 +10,11 @@ const Landing = ({funkos, handleSelect }) => {
       <p>Here are all the funkos! Sign In or Sign Up to explore more</p>
       <div>
           {funkos.map((funko) => (
-              <Link to={`/funkos/${funko._id}`}
-                  key={funko._id}
-                  onClick={() => handleSelect(funko)}
-              >
+              <li key={funko._id}>
+                <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}>
                   {funko.name}
-              </Link>
+                </Link>
+              </li>
           ))}
       </div>
     </main>

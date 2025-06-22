@@ -2,6 +2,7 @@
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState, useContext } from "react";
 import * as funkoService from '../../services/funkoService';
+import * as collectionService from '../../services/collectionService';
 import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router";
 
@@ -10,8 +11,9 @@ const FunkoDetail = ({ onDelete }) => {
   // grab the id from the route /:id
   const { id } = useParams();
   const { user } = useContext(UserContext);
-  const [funko, setFunko] = useState(null);
   const navigate = useNavigate();
+  const [funko, setFunko] = useState(null);
+  const [collected, setCollected] = useState(false);
 
   useEffect(() => {
     // Create async function
@@ -26,7 +28,16 @@ const FunkoDetail = ({ onDelete }) => {
           throw new Error(funko.err);
         }
         // Set funko state to the returned funko data
-        setFunko(funko)
+        setFunko(funko);
+
+        // Keep add to collect button disabled if its already in collection
+        if (user) {
+          // Check if funko is in collection
+          const collection = await collectionService.collectionIndex();
+          // Using some function, check for true/false in the collection
+          const inCollection = collection.funkos.some(funko => funko._id === id);
+          setCollected(inCollection);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -46,8 +57,34 @@ const FunkoDetail = ({ onDelete }) => {
       console.log(err);
     }
   }
-
   
+  // Define handleAddCollection
+  const handleAddCollection = async () => {
+    try {
+      // Get the addToCollection from collectionService
+      await collectionService.addToCollection(funko._id);
+
+      // Set collect to true
+      setCollected(true);
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // Define handleRemoveCollection
+  const handleRemoveCollection = async () => {
+    try {
+      // get the removeFromCollection from collectionService
+      await collectionService.removeFromCollection(funko._id);
+
+      // Set collect to false
+      setCollected(false);
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // return if props.selected is null
   if (!funko) {
@@ -65,6 +102,8 @@ const FunkoDetail = ({ onDelete }) => {
       <h2> Number: {funko.number}</h2>
       <h2>Rarity: {funko.rarity} </h2>
       <h2>Posted By: {funko.owner.firstname} {funko.owner.lastname}</h2> 
+
+
       {user && funko.owner && user._id === funko.owner._id && (
         <div>
           <button>
@@ -76,6 +115,13 @@ const FunkoDetail = ({ onDelete }) => {
             Delete Funko
           </button>
         </div>
+      )}
+
+
+      {user && (
+        <button onClick={collected ? handleRemoveCollection : handleAddCollection}>
+            {collected ? 'Remove From Collection' : 'Add To Collection'}
+        </button>
       )}
     </div>
   );

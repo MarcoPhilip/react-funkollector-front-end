@@ -12,16 +12,15 @@ const FunkoList = ({funkos, handleSelect, user, handleFormView, isFormOpen }) =>
             {funkos.length === 0 ? (
                 <h2>No Funkos</h2>
             ) : (
-                <div>
+                <ul>
                     {funkos.map((funko) => (
-                        <Link to={`/funkos/${funko._id}`}
-                            key={funko._id}
-                            onClick={() => handleSelect(funko)}
-                        >
-                            {funko.name}
+                        <li key={funko._id}>
+                        <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}>
+                        {funko.name}
                         </Link>
+                        </li>
                     ))}
-                </div>
+                </ul>
             )}
         </div>
         { user && (

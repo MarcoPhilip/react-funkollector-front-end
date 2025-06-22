@@ -9,8 +9,8 @@ const collectionIndex = async () => {
     try {
         const res = await fetch(BASE_URL, {
             headers: {
-                'Authorization': `Bearer ${token}`
-            }
+                'Authorization': `Bearer ${token}`,
+            },
         });
         return res.json();
     } catch (err) {
@@ -25,12 +25,15 @@ const addToCollection = async (funkoId) => {
     const token = localStorage.getItem('token');
 
     try {
-        const res = await fetch(`${BASE_URL}/${funkoId}`, {
-            method: 'PUT',
+        const res = await fetch(BASE_URL, {
+            method: 'POST',
             headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({funkoId}),
+        });
+        return res.json();
     } catch (err) {
         console.log(err);
     }
@@ -43,7 +46,7 @@ const addToCollection = async (funkoId) => {
 const removeFromCollection = async (funkoId) => {
     const token = localStorage.getItem('token');
     try {
-        const res = await fetch(`${BASE_URL}/${funkoId}`, {
+        const res = await fetch(`${BASE_URL}/funkos/${funkoId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`

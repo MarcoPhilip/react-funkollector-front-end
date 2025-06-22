@@ -25,6 +25,10 @@ import FunkoList from './components/FunkoList/FunkoList';
 import FunkoDetail from './components/FunkoDetail/FunkoDetail';
 // Import the FunkoForm component
 import FunkoForm from './components/FunkoForm/FunkoForm';
+// Import the Collection component
+import Collection from './components/Collection/Collection';
+// Import the Wishlist component 
+import Wishlist from './components/Wishlist/Wishlist';
 
 
 // Import the UserContext
@@ -200,8 +204,22 @@ function App() {
           />
         }/>
 
-        {/* <Route path='/collection' element={<Collection />} /> */}
-        {/* <Route path='/wishlist' element={<Wishlist />} /> */}
+        <Route path='/collections' element={
+          user ? 
+            <Collection 
+            user={user}
+            funkos={funkos}
+            handleSelect={handleSelect}
+          /> 
+          : 
+            <Landing 
+              funkos={funkos}
+              handleSelect={handleSelect}
+            />}  
+        />
+
+
+        <Route path='/wishlists' element={<Wishlist />} />
 
         {/* <Route path='/user' element={<AllUser />} /> */}
         {/* <Router path='/user/:id' element={<User />} /> */}

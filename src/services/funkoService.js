@@ -36,7 +36,6 @@ const create = async (formData) => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-
         body: JSON.stringify(formData),
     });
     return res.json();
