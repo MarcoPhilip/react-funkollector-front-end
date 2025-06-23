@@ -1,6 +1,6 @@
-import { Link } from 'react-router';
+import { Link, Outlet } from 'react-router';
 
-const FunkoList = ({funkos, handleSelect, user, handleFormView, isFormOpen }) => {
+const FunkoList = ({funkos, handleSelect, user}) => {
     
     if (!funkos || funkos.length === 0) {
         return <p>No Funkos yet.</p>
@@ -30,6 +30,7 @@ const FunkoList = ({funkos, handleSelect, user, handleFormView, isFormOpen }) =>
                 </button>
             </Link>        
         )} 
+        <Outlet />
         </> 
     );
 };

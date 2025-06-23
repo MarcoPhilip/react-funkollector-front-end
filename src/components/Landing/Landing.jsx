@@ -1,5 +1,5 @@
 // src/components/Landing.jsx
-import { Link } from 'react-router';
+import { Link, Outlet } from 'react-router';
 
 const Landing = ({funkos, handleSelect }) => {
 
@@ -17,6 +17,7 @@ const Landing = ({funkos, handleSelect }) => {
               </li>
           ))}
       </div>
+      <Outlet/>
     </main>
   );
 };

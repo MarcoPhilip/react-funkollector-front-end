@@ -1,4 +1,5 @@
-
+// Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 // Import useContext
 import { useContext } from 'react';
@@ -30,6 +31,10 @@ import Wishlist from './components/Wishlist/Wishlist';
 import UserList from './components/UserList/UserList';
 // Import the UserProfile component
 import UserProfile from './components/UserProfile/UserProfile';
+
+import Header from './components/Header/Header';
+
+
 
 
 // Import the UserContext
@@ -154,15 +159,21 @@ function App() {
   return (
     <>
       <NavBar />
-      <h2>Welcome to the Funkollector App!</h2>
+      <Header />
       <Routes>
-
         <Route path='/' element={
           user ? 
             <Dashboard
+              user={user}
               funkos={funkos} 
               handleSelect={handleSelect}
-            /> 
+              handleFormView={handleFormView}
+              onDelete={handleDelete}
+              initialFormData={selected}
+              handleSubmit={handleUpdate}
+              buttonText="Update Funko"
+            >
+            </Dashboard> 
           : 
             <Landing 
               funkos={funkos}
@@ -170,8 +181,7 @@ function App() {
             />} 
         />
 
-        <Route path='/sign-in' element={<SignInForm />} />
-        <Route path='/sign-up' element={<SignUpForm />} />
+        
 
         <Route path='/funkos' element={
           <FunkoList 
@@ -179,7 +189,6 @@ function App() {
             handleSelect={handleSelect}
             user={user}
             handleFormView={handleFormView}
-            
           />} 
         />
 
@@ -246,7 +255,12 @@ function App() {
             />}  
         />
 
+        <Route path='/sign-in' element={<SignInForm />} />
+        <Route path='/sign-up' element={<SignUpForm />} />
       </Routes>
+      
+
+      
     </>
   )
 };

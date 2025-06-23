@@ -1,6 +1,6 @@
 // Imports
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router";
+import { Outlet, Link } from "react-router";
 import * as userService from '../../services/userService';
 
 
@@ -42,6 +42,7 @@ const UserList = () => {
                 ))}
             </ul>
         )}
+        <Outlet/>
         </>
     );
 };

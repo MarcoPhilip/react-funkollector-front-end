@@ -36,8 +36,7 @@ const addToCollection = async (funkoId) => {
         return res.json();
     } catch (err) {
         console.log(err);
-    }
-    
+    }   
 };
 
 

@@ -5,8 +5,8 @@ import * as funkoService from '../../services/funkoService';
 import * as collectionService from '../../services/collectionService';
 import * as wishlistService from '../../services/wishlistService';
 import { UserContext } from "../../contexts/UserContext";
-import { Link } from "react-router";
-
+import { Link, Outlet } from "react-router";
+import BackButton from "../BackButton/BackButton";
 
 const FunkoDetail = ({ onDelete }) => {
   // grab the id from the route /:id
@@ -169,8 +169,10 @@ const FunkoDetail = ({ onDelete }) => {
           </button>
           </div>
         )} 
+
+        <BackButton/>
       </div>
-      
+      <Outlet/>
     </div>
   );
 };
