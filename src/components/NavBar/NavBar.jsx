@@ -48,15 +48,18 @@ const NavBar = () => {
     
 
     return (
-             <Navbar expand="lg" expanded={opennav} className="bg-body-tertiary">
+             <Navbar expand="lg" expanded={opennav} className="bg-body-tertiary" style={{
+                border: '3px solid black',
+                borderRadius: '10px'
+             }}>
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="#home" style={{fontFamily: 'Nova Square, sans-serif'}}>
                         <img src="/pop-logo.jpeg" alt="Funko Logo"
                         width="30"
                         height="30"
-                        style={{marginRight: '10px'}}
+                        style={{marginRight: '10px', }}
                          />
-                        Funkollector App
+                        FUNKOLLECTOR APP
                     </Navbar.Brand>
                     <Navbar.Toggle onClick={() => setOpennav(nav => !nav)} aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">

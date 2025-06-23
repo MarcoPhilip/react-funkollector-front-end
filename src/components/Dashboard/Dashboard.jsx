@@ -3,14 +3,12 @@
 //Bootstrap
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import  Nav  from 'react-bootstrap/Nav';
 import Wishlist from '../Wishlist/Wishlist';
 import FunkoList from '../FunkoList/FunkoList';
 import Collection from '../Collection/Collection';
 import UserList from '../UserList/UserList';
-import { Outlet } from 'react-router';
-
-import { useContext } from 'react';
+import { Outlet, useNavigate } from 'react-router';
+import { useContext, } from 'react';
 
 import { UserContext } from '../../contexts/UserContext';
 
@@ -43,6 +41,7 @@ const Dashboard = ({funkos, handleSelect, handleFormView}) => {
         <UserList />
       </Tab>
     </Tabs>
+
     <Outlet />
     </>
     

@@ -170,7 +170,7 @@ const FunkoDetail = ({ onDelete }) => {
           </div>
         )} 
 
-        <BackButton/>
+        
       </div>
       <Outlet/>
     </div>
