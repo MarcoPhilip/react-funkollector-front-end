@@ -1,7 +1,8 @@
 // Imports
 import { useState, useEffect } from "react";
-import { Outlet, Link } from "react-router";
+import { Link } from "react-router";
 import * as userService from '../../services/userService';
+
 
 
 // Define the UserList function
@@ -32,17 +33,23 @@ const UserList = () => {
         {users.length === 0 ? (
             <h2>No Users Yet.</h2>
         ) : (
-            <ul>
+            <div  style={{display: 'flex', flexWrap: 'wrap', gap: '1rem', }}>
                 {users.map(user => (
-                    <li key={user._id}>
-                        <Link to={`/users/${user._id}`}>
+                    <div 
+                    key={user._id}
+                    className="user-card"
+                    >
+                        <Link to={`/users/${user._id}`}
+                        style={{
+                            textDecoration: 'none',
+                            color: 'black'
+                        }}>
                             {user.firstname} {user.lastname}
                         </Link>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         )}
-        <Outlet/>
         </>
     );
 };

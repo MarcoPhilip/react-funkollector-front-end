@@ -48,10 +48,9 @@ const SignUpForm = () => {
 
   return (
     <main>
-      <h3>Sign Up</h3>
       <p>{message}</p>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form className="auth-forms"onSubmit={handleSubmit}>
+        <div className='form-field'>
           <label htmlFor='firstname'>First Name:</label>
           <input
             type='text'
@@ -62,7 +61,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className='form-field'>
           <label htmlFor='lastname'>Last Name:</label>
           <input
             type='text'
@@ -73,7 +72,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className='form-field'>
           <label htmlFor='username'>Username:</label>
           <input
             type='text'
@@ -84,7 +83,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className='form-field'>
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
@@ -95,7 +94,7 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
+        <div className='form-field'>
           <label htmlFor='confirm'>Confirm Password:</label>
           <input
             type='password'
@@ -106,9 +105,9 @@ const SignUpForm = () => {
             required
           />
         </div>
-        <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+        <div className='form-actions'>
+          <button className="btn-submit" disabled={isFormInvalid()}>Sign Up</button>
+          <button className="btn-cancel" onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>

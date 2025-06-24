@@ -6,7 +6,7 @@
 }
 body {
   font-family: 'Electrolize', sans-serif;
-  background-color: rgb(212, 237, 25);
+  background-color: rgba(246, 176, 64, 0.4);
 }
 .logo {
   height: 6em;
@@ -21,18 +21,8 @@ body {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.funko-card {
-  border: 2px solid black;
-  box-sizing: border-box;
-  flex: 1 1 calc(33% - 1rem);
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
-  background-color: rgba(227, 36, 36, 0.3);
-  padding: 1rem;
-  text-align: center;   
-}
+
+
 
 @keyframes logo-spin {
   from {

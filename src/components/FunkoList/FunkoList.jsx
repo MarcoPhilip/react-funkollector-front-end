@@ -23,7 +23,7 @@ const FunkoList = ({funkos, handleSelect, user}) => {
                         textDecoration: 'none',
                         color: 'black'
                     }}>
-                        <h3>{funko.name}</h3>
+                        <p><strong>{funko.name}</strong></p>
                         <p><strong>{funko.series} #{funko.number}</strong></p>
                     </Link>
               </div>

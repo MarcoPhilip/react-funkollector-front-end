@@ -33,6 +33,7 @@ import UserList from './components/UserList/UserList';
 import UserProfile from './components/UserProfile/UserProfile';
 
 import Header from './components/Header/Header';
+import AuthTab from './components/AuthTab/AuthTab';
 
 
 
@@ -170,7 +171,11 @@ function App() {
               handleSelect={handleSelect}
             />} 
         />
-          
+        
+      {user && (
+        <Route index element={<Navigate to='/funkos' />} />
+      )}
+
        {user ? (
         <Route path='/funkos' element={<Dashboard/>}>
           <Route index element={
@@ -279,10 +284,15 @@ function App() {
                   } />
           </Route>
 
-          <Route path='/sign-in' element={<SignInForm />} />
-          <Route path='/sign-up' element={<SignUpForm />} />
-
-        </Routes>
+          {/* <Route path='/sign-in' element={<SignInForm />} />
+          <Route path='/sign-up' element={<SignUpForm />} /> */}
+        <Route path='/sign-in' element={<AuthTab/>}>
+            <Route index element={<SignInForm/>}/>
+        </Route>
+        <Route path='/sign-up' element={<AuthTab/>}>
+            <Route index element={<SignUpForm/>}/>
+        </Route>
+      </Routes>
     </>
   )
 };
