@@ -9,7 +9,7 @@ const FunkoList = ({funkos, handleSelect, user}) => {
 
     return (
         <>
-        <div>
+        <div className='dash-container'>
             <h1>All Funkos</h1>
             {funkos.length === 0 ? (
                 <h2>No Funkos</h2>

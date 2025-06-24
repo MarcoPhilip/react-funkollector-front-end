@@ -7,16 +7,13 @@ const Landing = ({funkos, handleSelect }) => {
   return (
     <main>
       <p>Here are all the funkos! Sign In or Sign Up to explore more</p>
-      <div style={{display: 'flex', flexWrap: 'wrap', gap: '1rem', }}>
+      <div className='funko-list'>
           {funkos.map((funko) => (
               <div key={funko._id}
               className='funko-card'
               >
               <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}
-              style={{
-                textDecoration: 'none',
-                color: 'black'
-              }}>
+              className='text-link'>
                 <h3>{funko.name}</h3>
                 <p><strong>{funko.series} #{funko.number}</strong></p>
               </Link>

@@ -35,26 +35,29 @@ const Wishlist = ({ handleSelect }) => {
     // Rendering
     return (
         <>
-        <h1>My Wishlist</h1>
-        <div>
-            {wishlist.funkos.length === 0 ? (
-                <h2>No Funko Wishlist</h2>
-            ) : (
-                <div className='funko-list'>
-                    {wishlist.funkos.map((funko) => (
-                        <div key={funko._id}
-                        className="funko-card"
-                        >
-                        <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}
-                        className="link-text">
-                            <p><strong>{funko.name}</strong></p>
-                            <p><strong>{funko.series} #{funko.number}</strong></p>
-                        </Link>
-                        </div>
-                    ))}
-                </div>
-            )}
+        <div className='dash-container'>
+            <h1>My Wishlist</h1>
+            <div>
+                {wishlist.funkos.length === 0 ? (
+                    <h2>No Funko Wishlist</h2>
+                ) : (
+                    <div className='funko-list'>
+                        {wishlist.funkos.map((funko) => (
+                            <div key={funko._id}
+                            className="funko-card"
+                            >
+                            <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}
+                            className="link-text">
+                                <p><strong>{funko.name}</strong></p>
+                                <p><strong>{funko.series} #{funko.number}</strong></p>
+                            </Link>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
+        
         </>
     )
 };

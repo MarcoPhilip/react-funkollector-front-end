@@ -137,13 +137,14 @@ const FunkoDetail = ({ onDelete }) => {
   }
 
   return (
-    <div>
-      <h1>{funko.name}</h1>
-      <h2>Series: {funko.series}</h2>
-      <h2> Number: {funko.number}</h2>
-      <h2>Rarity: {funko.rarity} </h2>
-      <h2>Posted By: {funko.owner.firstname} {funko.owner.lastname}</h2> 
-
+    <div className="funko-detail-view">
+      <div className="funko-details">
+        <h1 className="funko-name-title">{funko.name}</h1>
+        <p><strong>Series:</strong> {funko.series}</p>
+        <p><strong>Number:</strong> {funko.number}</p>
+        <p><strong>Rarity:</strong> {funko.rarity} </p>
+        <p><strong>Posted By:</strong> {funko.owner.firstname} {funko.owner.lastname}</p> 
+      </div>
 
       {user && funko.owner && user._id === funko.owner._id && (
         <div className="funko-actions-1">
@@ -167,7 +168,6 @@ const FunkoDetail = ({ onDelete }) => {
             </button>
           </div>
       )} 
-      <Outlet/>
     </div>
   );
 };
