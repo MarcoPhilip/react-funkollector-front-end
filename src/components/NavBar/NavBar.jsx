@@ -54,7 +54,7 @@ const NavBar = () => {
              }}>
                 <Container>
                     <Navbar.Brand href="#home" style={{fontFamily: 'Nova Square, sans-serif'}}>
-                        <img src="/pop-logo.jpeg" alt="Funko Logo"
+                        <img className='nav-logo' src="/pop-logo.jpeg" alt="Funko Logo"
                         width="30"
                         height="30"
                         style={{marginRight: '10px', }}
