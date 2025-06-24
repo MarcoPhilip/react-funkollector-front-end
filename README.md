@@ -17,19 +17,19 @@ ___Funkollector___ is a Funko Pop! collection page. I have created this as a per
 
 ## 🌐 Links
 → [Deployment Link](https://react-funkollector-front-end.vercel.app/)
-→ [GitHub Repo Link](https://github.com/MarcoPhilip/express-api-funkollector)
+→ [GitHub Repo Link (Back End)](https://github.com/MarcoPhilip/express-api-funkollector)
 → [Notion Planning Link](https://www.notion.so/1faed4d6f92d80a2b4bfc21a7d8b9f3b?v=1faed4d6f92d801681de000c53fa04cb&source=copy_link)
 
 ## 💻 Technologies
 
 This application uses the following:
 
-- **React**
-- **React Router** 
-- **React Bootstrap** 
-- **Javascript** 
-- **Vercel** 
-- **Vite** 
+* **React** 
+* **React Router** 
+* **React Bootstrap** 
+* **Javascript** 
+* **Vercel** 
+* **Vite** 
 
 
 ## 🔮 Stretch Goals
@@ -38,6 +38,6 @@ I am looking forward to add more features to this app in the future. I will be a
 
 ## 🎨 Creator
 
-**MarcoPhilip**
+**Marco Philip Agapito**
 
 Your fellow *Funkolllector*.
