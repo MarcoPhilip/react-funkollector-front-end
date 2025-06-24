@@ -24,7 +24,6 @@ const Dashboard = () => {
 
       <Nav.Item eventKey="collection" title="My Collection">
         <Nav.Link to='/collections' as={Link} className='link-text'> My Collections </Nav.Link>
-          
       </Nav.Item>
 
       <Nav.Item eventKey="wishlist" title="My Wishlist" >

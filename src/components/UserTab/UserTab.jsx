@@ -2,7 +2,7 @@
 //Bootstrap
 import  Nav  from 'react-bootstrap/Nav';
 
-import { Outlet, Link,} from 'react-router';
+import { Link,} from 'react-router';
 
 const UserTab = () => {
 
@@ -26,7 +26,7 @@ const UserTab = () => {
             </Nav.Item>
 
         </Nav>
-        <Outlet/>
+    
         </>
     )
 }

@@ -4,6 +4,7 @@
 
 ## Overview
 
+___Funkollector___ is a Funko Pop! collection page. I have created this as a personal project to manage my love for funkos. This app also for all the funko enthusiasts out there! This app is the beginning stage and will have more features soon.
 
 
 ## 🎮 Features
@@ -33,7 +34,7 @@ This application uses the following:
 
 ## 🔮 Stretch Goals
 
-
+I am looking forward to add more features to this app in the future. I will be adding an 'upload a funko photo' feauture. Expect some more tab sections in the dashboard in the coming future. Layout updates are coming soon too!
 
 ## 🎨 Creator
 

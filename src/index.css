@@ -234,7 +234,7 @@ color: black
   gap: 2rem;
   margin-bottom: 1rem;
   max-width: 200px;
-  /* background-color: #535bf2; */
+
   margin-top: 1.5rem;
 }
 
@@ -245,7 +245,7 @@ color: black
   justify-content: center;
   max-width: 200px;
   gap: 1rem;
-  /* background-color: #535bf2; */
+
 }
 
 .funko-detail-view {
