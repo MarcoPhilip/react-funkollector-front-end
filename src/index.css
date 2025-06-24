@@ -49,14 +49,13 @@
   display: flex;
   flex-direction: wrap;
   gap: 2rem;
-  background-color: #d5d6ef;
   justify-content: space-between;
   padding: 1rem;
 }
 
 .user-profile section {
   flex: 1 1 45%;
-  background-color:#bfb907;
+  background-color:#f1ea2f;
   padding: 1rem;
   border: 2px solid rgb(38, 39, 16);
   border-radius: 8px;
