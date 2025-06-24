@@ -186,51 +186,68 @@ const FunkoForm = ({ handleSubmit, buttonText = 'Submit', initialFormData = {}})
     // And finally, the form itself.
     return (
         <div>
-        <form onSubmit={onSubmit}>
-            <label htmlFor="name"> Name </label>
-            <input
-            type='text'
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            />
-            <label htmlFor="series"> Series </label>
-            <select
-            type='text'
-            id="series"
-            name="series"
-            value={formData.series}
-            onChange={handleChange}
-            required
-            >
-                <option value='' disabled>
-                    Select a series
-                </option>
-                {seriesEnum.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
+        <form className="funko-form" onSubmit={onSubmit}>
+
+            <div className='form-field'>
+                <label htmlFor="name"> Name </label>
+                <input
+                type='text'
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                />
+            </div>
+
+            <div className='form-field'>
+                <label htmlFor="series"> Series </label>
+                <select
+                type='text'
+                id="series"
+                name="series"
+                value={formData.series}
+                onChange={handleChange}
+                required
+                >
+                    <option value='' disabled>
+                        Select a series
                     </option>
-                ))}
-            </select>
-            <label htmlFor="number"> Number </label>
-            <input
-            type='number'
-            id="number"
-            name="number"
-            value={formData.number}
-            onChange={handleChange}
-            />
-            <label htmlFor="rarity"> Rarity </label>
-            <input
-            type='text'
-            id="rarity"
-            name="rarity"
-            value={formData.rarity}
-            onChange={handleChange}
-            />
-            <button type="submit">{buttonText}</button>
+                    {seriesEnum.map((option) => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            <div className='form-field'>
+                <label htmlFor="number"> Number </label>
+                <input
+                type='number'
+                id="number"
+                name="number"
+                value={formData.number}
+                onChange={handleChange}
+                />
+            </div>
+
+            <div className='form-field'>
+                <label htmlFor="rarity"> Rarity </label>
+                <input
+                type='text'
+                id="rarity"
+                name="rarity"
+                value={formData.rarity}
+                onChange={handleChange}
+                />
+            </div>
+
+            <div className='form-actions'>
+                <button className='btn-submit' type="submit">      
+                    {buttonText}
+                </button>
+            </div>
         </form>
         </div>
     );

@@ -36,22 +36,23 @@ const Collection = ({ handleSelect }) => {
     return (
         <>
         <h1>My Collection</h1>
-       <div style={{display: 'flex', flexWrap: 'wrap', gap: '1rem', }}>
-          {collection.funkos.map((funko) => (
-              <div key={funko._id}
-              className="funko-card"
-              >
-              <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}
-              style={{
-                textDecoration: 'none',
-                color: 'black'
-              }}>
-                <p><strong>{funko.name}</strong></p>
-                <p><strong>{funko.series} #{funko.number}</strong></p>
-              </Link>
-              </div>
-          ))}
-      </div>
+        {collection.funkos.length == 0 ? (
+            <h2>No Collection Yet</h2>
+        ) : (
+            <div className='funko-list'>
+                {collection.funkos.map((funko) => (
+                    <div key={funko._id}
+                    className="funko-card"
+                    >
+                        <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}
+                        className="link-text">
+                            <p><strong>{funko.name}</strong></p>
+                            <p><strong>{funko.series} #{funko.number}</strong></p>
+                        </Link>
+                    </div>
+                ))}
+            </div>
+        )}
         </>
     )
 };

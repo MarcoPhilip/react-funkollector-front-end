@@ -16,7 +16,7 @@ const Dashboard = () => {
       variant="tabs"
       defaultActiveKey="funkos"
       id="uncontrolled-tab-example"
-      className="mb-3"
+      className="center-tabs"
     >
       <Nav.Item eventKey="funkos" title="All Funkos">
         <Nav.Link to='/funkos' as={Link} className='link-text'> Funko List </Nav.Link>

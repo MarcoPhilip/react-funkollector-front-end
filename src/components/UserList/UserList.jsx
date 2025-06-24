@@ -33,9 +33,9 @@ const UserList = () => {
         {users.length === 0 ? (
             <h2>No Users Yet.</h2>
         ) : (
-            <div  style={{display: 'flex', flexWrap: 'wrap', gap: '1rem', }}>
+            <div className="user-list">
                 {users.map(user => (
-                    <div 
+                    <div
                     key={user._id}
                     className="user-card"
                     >
@@ -44,7 +44,9 @@ const UserList = () => {
                             textDecoration: 'none',
                             color: 'black'
                         }}>
-                            {user.firstname} {user.lastname}
+                            <p>
+                                {user.firstname} {user.lastname}
+                            </p>
                         </Link>
                     </div>
                 ))}

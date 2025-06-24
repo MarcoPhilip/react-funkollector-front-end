@@ -35,35 +35,21 @@ const UserProfile = () => {
     // Render
     return (
         <>
-        <h1>{user.firstname} {user.lastname}'s Profile</h1>
-
+        <h1 className="user-header">{user.firstname} {user.lastname}'s Profile</h1>
+        <div className="user-profile">
         <section>
-            <h3>Collections</h3>
+            <h2>Collections</h2>
             {collection.length === 0 ? (
                 <h4>No Collection</h4>
             ) : (
-                <div style={{display: 'flex', flexWrap: 'wrap', gap: '1rem', }}>
+                <div className='user-funko-list'>
                     {collection.map((funko) => (
                         <div key={funko._id}
-                        style={{
-                            border: '2px solid black',
-                            boxSizing: 'border-box',
-                            flex: '1 1 calc(33% - 1rem)',
-                            width: '100%',
-                            height: 'auto',
-                            borderRadius: '10px',
-                            marginBottom: '0.5rem', 
-                            backgroundColor: 'rgba(227, 36, 36, 0.3)', 
-                            padding: '1rem',
-                            textAlign: 'center'
-                        }}
+                        className="user-funko-cards"
                         >
                         <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}
-                        style={{
-                            textDecoration: 'none',
-                            color: 'black'
-                        }}>
-                            <h3>{funko.name}</h3>
+                        className="link-text">
+                            <p>{funko.name}</p>
                             <p><strong>{funko.series} #{funko.number}</strong></p>
                                 </Link>
                         </div>
@@ -71,41 +57,27 @@ const UserProfile = () => {
                 </div>
             )}
         </section>
-            <h3>Wishlists</h3>
+        <section>
+            <h2>Wishlists</h2>
             {wishlist.length === 0 ? (
                 <h4>No Wishlists</h4>
             ) : (
-                <div style={{display: 'flex', flexWrap: 'wrap', gap: '1rem', }}>
+                <div className='user-funko-list'>
                     {wishlist.map((funko) => (
                         <div key={funko._id}
-                        style={{
-                            border: '2px solid black',
-                            boxSizing: 'border-box',
-                            flex: '1 1 calc(33% - 1rem)',
-                            width: '100%',
-                            height: 'auto',
-                            borderRadius: '10px',
-                            marginBottom: '0.5rem', 
-                            backgroundColor: 'rgba(227, 36, 36, 0.3)', 
-                            padding: '1rem',
-                            textAlign: 'center'
-                        }}
+                        className="user-funko-cards"
                         >
                         <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}
-                        style={{
-                            textDecoration: 'none',
-                            color: 'black'
-                        }}>
-                            <h3>{funko.name}</h3>
+                        className="link-text">
+                            <p>{funko.name}</p>
                             <p><strong>{funko.series} #{funko.number}</strong></p>
                         </Link>
                         </div>
                     ))}
                 </div>
             )}
-        <section>
-
-        </section>
+            </section>
+            </div>
         </>
     )
 };

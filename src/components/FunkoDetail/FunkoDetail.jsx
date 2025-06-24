@@ -146,10 +146,10 @@ const FunkoDetail = ({ onDelete }) => {
 
 
       {user && funko.owner && user._id === funko.owner._id && (
-        <div>
+        <div className="funko-actions-1">
           <button className="btn-submit">
             <Link to={`/funkos/${funko._id}/edit`} className="link-text">
-              Edit Funko
+              Edit Edit
             </Link>
           </button>
           <button className='btn-cancel' onClick={() => handleDelete(funko._id)}>
@@ -157,21 +157,16 @@ const FunkoDetail = ({ onDelete }) => {
           </button>
         </div>
       )}
-
-      <div>
          {user && (
-          <div>
-          <button className='btn-add' onClick={collected ? handleRemoveCollection : handleAddCollection}>
-            {collected ? 'Remove From Collection' : 'Add To Collection'}
-          </button>
-          <button className='btn-add' onClick={wished ? handleRemoveWishlist : handleAddWishlist}>
-            {wished ? 'Remove From Wishlist' : 'Add To Wishlist'}
-          </button>
+          <div className="funko-actions-2">
+            <button className='btn-add' onClick={collected ? handleRemoveCollection : handleAddCollection}>
+              {collected ? 'Remove From Collection' : 'Add To Collection'}
+            </button>
+            <button className='btn-add' onClick={wished ? handleRemoveWishlist : handleAddWishlist}>
+              {wished ? 'Remove From Wishlist' : 'Add To Wishlist'}
+            </button>
           </div>
-        )} 
-
-        
-      </div>
+      )} 
       <Outlet/>
     </div>
   );
