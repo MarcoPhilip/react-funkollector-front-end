@@ -54,7 +54,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
+.funko-card {
+  border: '2px solid black';
+  box-sizing: 'border-box';
+  flex: '1 1 calc(33% - 1rem)';
+  width: '100%';
+  height: 'auto';
+  border-radius: '10px';
+  margin-bottom: '0.5rem';
+  background-color: 'rgba(227, 36, 36, 0.3)';
+  padding: '1rem';
+  text-align: 'center'   
+}
 
 
 

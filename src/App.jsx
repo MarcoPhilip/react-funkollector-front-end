@@ -163,104 +163,126 @@ function App() {
       <Routes>
         <Route path='/' element={
           user ? 
-            <Dashboard
-              user={user}
-              funkos={funkos} 
-              handleSelect={handleSelect}
-              handleFormView={handleFormView}
-              onDelete={handleDelete}
-              initialFormData={selected}
-              handleSubmit={handleUpdate}
-              buttonText="Update Funko"
-            >
-            </Dashboard> 
+            <Dashboard/> 
           : 
             <Landing 
               funkos={funkos}
               handleSelect={handleSelect}
             />} 
         />
+          
+       {user ? (
+        <Route path='/funkos' element={<Dashboard/>}>
+          <Route index element={
+            <FunkoList 
+              funkos={funkos}
+              handleSelect={handleSelect}
+              user={user}
+              handleFormView={handleFormView}
+            />} 
+          />
+
+          <Route path=':id' element={
+              <FunkoDetail 
+                user={user}
+                onDelete={handleDelete}
+              />}
+          />
+        </Route>
 
         
+       ) : (
 
-        <Route path='/funkos' element={
-          <FunkoList 
-            funkos={funkos}
-            handleSelect={handleSelect}
-            user={user}
-            handleFormView={handleFormView}
-          />} 
-        />
-
-        <Route path='/funkos/:id' element={
-            <FunkoDetail 
+        <Route>
+          <Route index element={
+            <FunkoList 
+              funkos={funkos}
+              handleSelect={handleSelect}
               user={user}
-              onDelete={handleDelete}
-            />
-        }/>
-
-        <Route path='/funkos/new' element={
-          <FunkoForm 
-            handleSubmit={handleAddFunko}
-            buttonText="Add Funko"
+              handleFormView={handleFormView}
+            />} 
           />
-        }/>
 
-        <Route path='/funkos/:id/edit' element={
-          <FunkoForm
-            initialFormData={selected}
-            handleSubmit={handleUpdate}
-            buttonText="Update Funko"
+          <Route path='/funkos/:id' element={
+            <FunkoDetail 
+                user={user}
+                onDelete={handleDelete}
+            />}
           />
-        }/>
-
-        <Route path='/collections' element={
-          user ? 
-            <Collection 
-            user={user}
-            funkos={funkos}
-            handleSelect={handleSelect}
-          /> 
-          : 
-            <Navigate to='/sign-in'
-            />}  
-        />
 
 
-        <Route path='/wishlists' element={
-          user ? 
-            <Wishlist 
-            user={user}
-            funkos={funkos}
-            handleSelect={handleSelect}
-          /> 
-          : 
-            <Navigate to='/sign-in'
-            />}   
-        />
+        </Route>    
+       )}
 
-        <Route path='/users' element={
-          user ?
-            <UserList />
-          : 
-            <Navigate to='/sign-in'
-            />}  
-        />
+          <Route path='/funkos/new' element={<Dashboard/>}>
+            <Route index element={
+              user ?
+                <FunkoForm 
+                  handleSubmit={handleAddFunko}
+                  buttonText="Add Funko"
+                />
+              : <Navigate to='/sign-in'/>
+            }/>
+          </Route>
 
-        <Route path='/users/:userId' element={
-          user ? 
-            <UserProfile /> 
-          : 
-            <Navigate to='/sign-in'
-            />}  
-        />
+          <Route path='/funkos/:id/edit' element={<Dashboard />}>
+            <Route index element={
+              user ?
+                <FunkoForm
+                  initialFormData={selected}
+                  handleSubmit={handleUpdate}
+                  buttonText="Update Funko"
+                />
+              :
+                <Navigate to='/sign-in'/>
+            }/>
+          </Route>
+        
+          <Route path="/collections" element={<Dashboard />} >
+              <Route index element={
+              user ?
+                <Collection
+                  user={user}
+                  funkos={funkos}
+                  handleSelect={handleSelect} />
+              :
+                <Navigate to="/sign-in"/>
+              } />
+          </Route>
+          <Route path='/wishlists' element={<Dashboard />} >
+              <Route index element={
+              user ? 
+                <Wishlist 
+                  user={user}
+                  funkos={funkos}
+                  handleSelect={handleSelect} />
+              : 
+                <Navigate to='/sign-in'/>
+              } />
+          </Route>   
 
-        <Route path='/sign-in' element={<SignInForm />} />
-        <Route path='/sign-up' element={<SignUpForm />} />
-      </Routes>
-      
+          <Route path='/users' element={<Dashboard />}>
+              <Route index element={
+                user ? 
+                  <UserList/>
+                : 
+                  <Navigate to='/sign-in'/>
+                } />
+          </Route>
 
-      
+          <Route path='/users/:userId' element={<Dashboard />}>
+                <Route index element={
+                  user ?
+                    <UserProfile />
+                  : 
+                    <Navigate to='/sign-in'/>
+                  } />
+          </Route>
+
+          <Route path='/sign-in' element={<SignInForm />} />
+          <Route path='/sign-up' element={<SignUpForm />} />
+
+        </Routes>
     </>
   )
 };

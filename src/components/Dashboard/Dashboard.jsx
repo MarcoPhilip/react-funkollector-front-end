@@ -3,48 +3,49 @@
 //Bootstrap
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+
 import Wishlist from '../Wishlist/Wishlist';
 import FunkoList from '../FunkoList/FunkoList';
 import Collection from '../Collection/Collection';
 import UserList from '../UserList/UserList';
-import { Outlet, useNavigate } from 'react-router';
+import { Outlet, Link, useParams } from 'react-router';
 import { useContext, } from 'react';
-
+import  Nav  from 'react-bootstrap/Nav';
 import { UserContext } from '../../contexts/UserContext';
+import FunkoDetail from '../FunkoDetail/FunkoDetail';
 
 
-const Dashboard = ({funkos, handleSelect, handleFormView}) => {
+const Dashboard = () => {
   const { user } = useContext(UserContext);
-
+  const { id } = useParams();
   return (
     <>
-    <Tabs
+    <Nav
+      variant="tabs"
       defaultActiveKey="funkos"
       id="uncontrolled-tab-example"
       className="mb-3"
     >
-      <Tab eventKey="funkos" title="All Funkos">
-        <FunkoList
-        funkos={funkos}
-        user={user}
-        handleSelect={handleSelect}
-        handleFormView={handleFormView}
-        />
-      </Tab>
-      <Tab eventKey="collection" title="My Collection">
-        <Collection />
-      </Tab>
-      <Tab eventKey="wishlist" title="My Wishlist" >
-        <Wishlist />
-      </Tab>
-      <Tab eventKey="funkollectors" title="All Funkollectors" >
-        <UserList />
-      </Tab>
-    </Tabs>
+      <Nav.Item eventKey="funkos" title="All Funkos">
+        <Nav.Link to='/funkos' as={Link}> Funko List </Nav.Link>
+      </Nav.Item>
 
+      <Nav.Item eventKey="collection" title="My Collection">
+        <Nav.Link to='/collections' as={Link}> My Collections </Nav.Link>
+          
+      </Nav.Item>
+
+      <Nav.Item eventKey="wishlist" title="My Wishlist" >
+        <Nav.Link to='/wishlists' as={Link}> My Wishlists </Nav.Link>
+        
+      </Nav.Item>
+
+      <Nav.Item eventKey="funkollectors" title="All Funkollectors" >
+        <Nav.Link to='/users' as={Link}> All Funkollectors </Nav.Link>
+      </Nav.Item>
+    </Nav>
     <Outlet />
     </>
-    
   );
 };
 

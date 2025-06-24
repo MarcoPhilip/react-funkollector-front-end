@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router';
 
+
 const FunkoList = ({funkos, handleSelect, user}) => {
     
     if (!funkos || funkos.length === 0) {
@@ -14,19 +15,8 @@ const FunkoList = ({funkos, handleSelect, user}) => {
             ) : (
                 <div style={{display: 'flex', flexWrap: 'wrap', gap: '1rem', }}>
                 {funkos.map((funko) => (
-                    <div key={funko._id}
-                    style={{
-                        border: '2px solid black',
-                        boxSizing: 'border-box',
-                        flex: '1 1 calc(33% - 1rem)',
-                        width: '100%',
-                        height: 'auto',
-                        borderRadius: '10px',
-                        marginBottom: '0.5rem', 
-                        backgroundColor: 'rgba(227, 36, 36, 0.3)', 
-                        padding: '1rem',
-                        textAlign: 'center'
-                    }}
+                    <div key={funko._id }
+                    className='funko-card'
                     >
                     <Link to={`/funkos/${funko._id}`} onClick={() => handleSelect(funko)}
                     style={{
